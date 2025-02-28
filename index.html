@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- HEADER -->
+        <header class="bg-dark text-white py-3">
+            <div class="container">
+                <h1 class="display-4 text-center">Food Blog</h1>
+                <nav>
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item"><a class="nav-link text-white" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#">Recipes</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#">Lifestyles</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#">Videos</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#">About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="images/chili.jpg" alt="White Chicken Chili" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-md-8">
+                    <section id="comments">
+                        <h2 class="text-primary mb-4">Comments</h2>
+                        <div v-for="comment in comments" :key="comment.id" class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="images/profile.png" alt="Profile" class="profile-img" @click="showProfile(comment.author)">
+                                    <div class="ml-3">
+                                        <h5 class="card-title">{{ comment.author }}</h5>
+                                        <small class="text-muted">{{ comment.date }}</small>
+                                    </div>
+                                </div>
+                                <p class="card-text">{{ comment.text }}</p>
+                                <button class="btn btn-link" @click="showProfile(comment.author)">View Profile</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="bg-dark text-white text-center py-3 mt-5">
+            <p>&copy; 2025 Food Blog</p>
+        </footer>
+
+        <!-- PROFILE MODAL -->
+        <div v-if="showFloatingBox" class="floating-box">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h3>{{ selectedProfile.name }}</h3>
+                    <button class="close-btn" @click="closeProfile">X</button>
+                </div>
+                <div class="card-body">
+                    <p><strong>Foodie Level:</strong> {{ selectedProfile.foodieLevel }}</p>
+                    <p><strong>Bio:</strong> {{ selectedProfile.bio }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
